@@ -1,6 +1,7 @@
-#include "plotter.hpp"
+#include "cairoplot/constants.hpp"
+#include "cairoplot/plotter.hpp"
+
 #include <gdk/gdkevents.h>
-#include <iostream>
 
 using namespace CairoGraphConstants;
 

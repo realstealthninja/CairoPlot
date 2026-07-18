@@ -1,4 +1,7 @@
-#include "plotter.hpp"
+#include "cairoplot/constants.hpp"
+#include "cairoplot/options.hpp"
+#include "cairoplot/plotter.hpp"
+
 #include <iomanip>
 #include <iostream>
 
@@ -30,13 +33,13 @@ void CGraph::CairoGraph::create_tickmark_labels(const Cairo::RefPtr<Cairo::Conte
 
     cr->set_source_rgba(axes_colour.get_red(), axes_colour.get_green(), axes_colour.get_blue(), 1.0);
 
-    if (true == forcescientificy) {
+    if (forcescientificy) {
         labely[0] = Glib::ustring::format(std::scientific, plot.ymax);
         labely[1] = Glib::ustring::format(std::scientific, plot.ymin + 0.75 * (plot.ymax - plot.ymin));
         labely[2] = Glib::ustring::format(std::scientific, plot.ymin + 0.50 * (plot.ymax - plot.ymin));
         labely[3] = Glib::ustring::format(std::scientific, plot.ymin + 0.25 * (plot.ymax - plot.ymin));
         labely[4] = Glib::ustring::format(std::scientific, plot.ymin);
-    } else if (precisiony > 0 && false == showpointy) // formatted to width
+    } else if (precisiony > 0 && !showpointy) // formatted to width
     {
         int precision = precisiony + static_cast<int>(log10(1.0 / plot.zoom_factor_y));
         if (precision > 6)
@@ -47,7 +50,7 @@ void CGraph::CairoGraph::create_tickmark_labels(const Cairo::RefPtr<Cairo::Conte
         labely[2] = Glib::ustring::format(std::fixed, std::setprecision(precision), plot.ymin + 0.50 * (plot.ymax - plot.ymin));
         labely[3] = Glib::ustring::format(std::fixed, std::setprecision(precision), plot.ymin + 0.25 * (plot.ymax - plot.ymin));
         labely[4] = Glib::ustring::format(std::fixed, std::setprecision(precision), plot.ymin);
-    } else if (true == showpointy) // nicely formatted
+    } else if (showpointy) // nicely formatted
     {
         labely[0] = Glib::ustring::format(std::showpoint, plot.ymax);
         labely[1] = Glib::ustring::format(std::showpoint, plot.ymin + 0.75 * (plot.ymax - plot.ymin));
@@ -123,13 +126,13 @@ void CGraph::CairoGraph::create_tickmark_labels(const Cairo::RefPtr<Cairo::Conte
         }
     }
 
-    if (true == forcescientificx) {
+    if (forcescientificx) {
         labelx[0] = Glib::ustring::format(std::scientific, plot.xmax);
         labelx[1] = Glib::ustring::format(std::scientific, plot.xmin + 0.75 * (plot.xmax - plot.xmin));
         labelx[2] = Glib::ustring::format(std::scientific, plot.xmin + 0.50 * (plot.xmax - plot.xmin));
         labelx[3] = Glib::ustring::format(std::scientific, plot.xmin + 0.25 * (plot.xmax - plot.xmin));
         labelx[4] = Glib::ustring::format(std::scientific, plot.xmin);
-    } else if (precisionx > 0 && false == showpointx) // formatted to width
+    } else if (precisionx > 0 && showpointx) // formatted to width
     {
         int precision = precisionx + static_cast<int>(log10(1.0 / plot.zoom_factor_x));
         if (precision > 6)
@@ -140,7 +143,7 @@ void CGraph::CairoGraph::create_tickmark_labels(const Cairo::RefPtr<Cairo::Conte
         labelx[2] = Glib::ustring::format(std::fixed, std::setprecision(precision), plot.xmin + 0.50 * (plot.xmax - plot.xmin));
         labelx[3] = Glib::ustring::format(std::fixed, std::setprecision(precision), plot.xmin + 0.25 * (plot.xmax - plot.xmin));
         labelx[4] = Glib::ustring::format(std::fixed, std::setprecision(precision), plot.xmin);
-    } else if (true == showpointx) // nicely formated
+    } else if (showpointx) // nicely formated
     {
         labelx[0] = Glib::ustring::format(std::showpoint, plot.xmax);
         labelx[1] = Glib::ustring::format(std::showpoint, plot.xmin + 0.75 * (plot.xmax - plot.xmin));
@@ -269,7 +272,7 @@ void CGraph::CairoGraph::create_labels(const Cairo::RefPtr<Cairo::Context>& cr) 
         legendlayout->set_markup(graph_legend);
         legendlayout->get_pixel_size(label_width, label_height);
 
-        if (legend_pos == CairoGraphPos::LEGEND_BOTTOM)
+        if (legend_pos == CairoGraphLegendPosition::LEGEND_BOTTOM)
             cr->move_to(w * (OFFSET_X + 4.0 * TICKS_LENGTH), h * (OFFSET_Y + GRAPH_HEIGHT - TICKS_LENGTH) - label_height);
         else
             cr->move_to(w * (OFFSET_X + 4.0 * TICKS_LENGTH), h * (OFFSET_Y + TICKS_LENGTH));
@@ -284,7 +287,7 @@ void CGraph::CairoGraph::create_labels(const Cairo::RefPtr<Cairo::Context>& cr) 
 
         cr->set_line_width(2.0);
 
-        if (legend_pos == CairoGraphPos::LEGEND_BOTTOM) {
+        if (legend_pos == CairoGraphLegendPosition::LEGEND_BOTTOM) {
             cr->move_to(w * (OFFSET_X + TICKS_LENGTH), h * (OFFSET_Y + GRAPH_HEIGHT - TICKS_LENGTH) - 0.5 * label_height - 2.0);
             cr->line_to(w * (OFFSET_X + 3.0 * TICKS_LENGTH), h * (OFFSET_Y + GRAPH_HEIGHT - TICKS_LENGTH) - 0.5 * label_height - 2.0);
         } else {

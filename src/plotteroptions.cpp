@@ -1,4 +1,6 @@
-#include "plotter.hpp"
+#include "cairoplot/constants.hpp"
+#include "cairoplot/options.hpp"
+#include "cairoplot/plotter.hpp"
 
 using namespace CairoGraphConstants;
 
@@ -16,7 +18,7 @@ void CGraph::CairoGraph::set_title(const Glib::ustring& title) {
 }
 
 void CGraph::CairoGraph::set_axes_labels(const Glib::ustring& xlabel, const Glib::ustring& ylabel, Glib::ustring fontfamily) {
-    //! Set the axes lables of the X and Y axes. Pango markupo is supported.
+    //! Set the axes labels of the X and Y axes. Pango markupo is supported.
     //! xlabel X axis label.
     //! ylabel Y axes label.
     //! Pango font family. The default is Nimbus Roman ( if present on the system)
@@ -130,7 +132,7 @@ void CGraph::CairoGraph::set_tick_label_format_y(const bool showpoint, const int
     precisiony = precision;
 }
 
-void CGraph::CairoGraph::add_single_legend(const Glib::ustring& legend, CairoGraphPos pos, const bool showlinecolour) {
+void CGraph::CairoGraph::add_single_legend(const Glib::ustring& legend, CairoGraphLegendPosition pos, const bool showlinecolour) {
     //! Display a legend, used for single series plots.
     //! CairoGraphPos pos: Displayed at postion pos, LEGEND_TOP or LEGEND_BOTTOM
     //! bool showlinecolour: Whether to show the line colour indicator.

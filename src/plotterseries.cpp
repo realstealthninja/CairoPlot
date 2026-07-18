@@ -1,9 +1,7 @@
-#include "plotter.hpp"
+#include "cairoplot/plotter.hpp"
 
 #include <iostream>
 #include <limits>
-
-using namespace CairoGraphConstants;
 
 void CGraph::CairoGraph::add_multi_series(const std::vector<std::vector<double>>& xvalues,
     const std::vector<std::vector<double>>& yvalues,
@@ -90,7 +88,7 @@ void CGraph::CairoGraph::add_series(const std::vector<double>& xvalues,
 
     numpoints.emplace_back(xvalues.size());
 
-    if (true == make_copy) {
+    if (make_copy) {
         seriesx.emplace_back(xvalues);
         seriesy.emplace_back(yvalues);
         m_px.emplace_back(seriesx[0].data());

@@ -1,4 +1,4 @@
-#include "plotter.hpp"
+#include "cairoplot/plotter.hpp"
 #include <gtkmm/cssprovider.h>
 #include <gtkmm/settings.h>
 

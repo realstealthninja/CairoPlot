@@ -1,4 +1,4 @@
-#include "plotter.hpp"
+#include "cairoplot/plotter.hpp"
 
 Gtk::Grid& CGraph::CairoGraph::create_graph() {
     set_hexpand(true);

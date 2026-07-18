@@ -1,6 +1,5 @@
-#include "plotter.hpp"
-#include <iomanip>
-#include <iostream>
+#include "cairoplot/plotter.hpp"
+#include "cairoplot/constants.hpp"
 
 using namespace CairoGraphConstants;
 
