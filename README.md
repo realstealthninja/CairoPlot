@@ -72,6 +72,45 @@ With a little work Wolfram Mathematica Manipulate/Animate style plots can also b
 
 ### Using the library in your project
 
-Simply include the subproject/cairoplot files in your project source file tree. Beyond that, everything is the same as if one were building any gtkmm application. Whether you want build it as a subproject or include the files directly as part of your project is optional.
+There are <> ways of including this into your project.
+
+#### As a github submodule
+
+Add the repository as a submodule
+
+```
+git submodule add https://github.com/realstealthninja/carioplot subprojects/cairoplot
+```
+
+Then in your meson build file
+
+```py
+deps = [
+    ...
+    dependency('libcairoplot', fallback: ['libcairoplot', 'libcairoplot_dep'])
+    ...
+]
+```
+
+#### Using meson wrap
+
+in subprojects/libcairoplot.wrap
+
+```toml
+[wrap-git]
+url = https://github.com/realstealthninja/cairoplot.git
+revision = HEAD
+depth = 1
+```
+
+then in your meson.build
+
+```py
+deps = [
+    ...
+    dependency('libcairoplot')
+    ...
+]
+```
 
 Enjoy.
