@@ -72,8 +72,6 @@ With a little work Wolfram Mathematica Manipulate/Animate style plots can also b
 
 ### Using the library in your project
 
-There are <> ways of including this into your project.
-
 #### As a github submodule
 
 Add the repository as a submodule
@@ -96,7 +94,7 @@ deps = [
 
 in subprojects/libcairoplot.wrap
 
-```toml
+```ini
 [wrap-git]
 url = https://github.com/realstealthninja/cairoplot.git
 revision = HEAD
