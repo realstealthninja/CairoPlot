@@ -6,7 +6,6 @@ project('libcairoplot',  'cpp',
                    ],
 )
 
-
 gtkmmdeps = [
   dependency('gtkmm-4.0', version: '>= 4.00'),
 ]
@@ -29,3 +28,14 @@ libcairoplot = static_library('cairoplot',
 libcairoplot_dep = declare_dependency(include_directories : inc,
   compile_args : ['-Wall', '-Wextra', '-pedantic', '-Wno-overlength-strings'], # shut up gresource
   link_with : libcairoplot)
+
+
+if get_option('build_examples')
+  subdir('examples/lineplot')
+
+  executable('lineplot', lineplot_src,
+    dependencies: [lineplot_deps, libcairoplot_dep],
+    override_options : ['cpp_std=c++17'],
+    cpp_args : ['-Wall', '-Wextra', '-pedantic'],
+  )
+endif
