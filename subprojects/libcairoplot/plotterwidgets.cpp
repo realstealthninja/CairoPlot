@@ -1,7 +1,6 @@
 #include "plotter.hpp"
 
-Gtk::Grid &CGraph::CairoGraph::create_graph()
-{
+Gtk::Grid& CGraph::CairoGraph::create_graph() {
     set_hexpand(true);
     set_vexpand(true);
     set_size_request(256, 256); // give it something to begin with
@@ -29,8 +28,7 @@ Gtk::Grid &CGraph::CairoGraph::create_graph()
     return *grid;
 }
 
-Gtk::Grid &CGraph::CairoGraph::get_motion_tracker()
-{
+Gtk::Grid& CGraph::CairoGraph::get_motion_tracker() {
     xvalue->set_width_chars(12);
     yvalue->set_width_chars(12);
     cursor_grid->attach(*xvaluelabel, 0, 0);

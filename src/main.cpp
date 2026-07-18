@@ -18,8 +18,7 @@
 
 #include "cairoplot-window.hpp"
 
-int main (int argc, char *argv[])
-{
-	auto app = Gtk::Application::create("org.gnome.plotter");
-	return app->make_window_and_run<CairoplotWindow>(argc, argv, app);
+int main(int argc, char* argv[]) {
+    auto app = Gtk::Application::create("org.gnome.plotter");
+    return app->make_window_and_run<CairoplotWindow>(argc, argv, app);
 }
