@@ -3,3 +3,7 @@ build/**
 build-release/**
 .vscode/**
 .vscode
+
+.cache/
+.warplock
+.vscode
