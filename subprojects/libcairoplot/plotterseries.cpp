@@ -4,7 +4,7 @@
 #include <iostream>
 #include <limits>
 
-using namespace CarioGraphConstants;
+using namespace CairoGraphConstants;
 
 void CGraph::CairoGraph::add_multi_series(  const std::vector<std::vector<double>> &xvalues, 
                                             const std::vector<std::vector<double>> &yvalues, 
