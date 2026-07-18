@@ -1,4 +1,8 @@
 #pragma once
+
+#include "cairoplot/themes.hpp"
+#include "options.hpp"
+
 #include <cairomm/cairomm.h>
 #include <cairomm/context.h>
 #include <gdk/gdkkeysyms.h>
@@ -14,41 +18,6 @@
 #include <gtkmm/grid.h>
 #include <gtkmm/label.h>
 #include <gtkmm/window.h>
-
-namespace CairoGraphConstants {
-constexpr double BOX_LINEWIDTH = 1.5;
-constexpr double GRID_LINEWIDTH = 0.0005; // in scaled coordinates
-constexpr double OFFSET_X = 0.1750;
-constexpr double OFFSET_Y = 0.1000;
-constexpr double GRAPH_WIDTH = 0.720;
-constexpr double GRAPH_HEIGHT = 0.720;
-constexpr double TICKS_LENGTH = 0.010;
-const std::vector<double> dashes1 { 5.0, 2.5 };
-const std::vector<double> dashes2 { 2.5, 2.5 };
-const std::vector<double> dashes3 { 0.008, 0.012 }; // in scaled coordinates
-constexpr int start_height = 256;
-constexpr int start_width = 256;
-
-} // namespace CairoGraphConstants
-
-enum class CairoGraphLineStyle {
-    SOLID_LINE,
-    DASHED_LINE,
-    DOTS,
-    CIRCLE
-};
-
-enum class CairoGraphBoxStyle {
-    AXES_GRID,
-    BOX_GRID,
-    AXES_ONLY,
-    BOX_ONLY
-};
-
-enum class CairoGraphPos {
-    LEGEND_TOP,
-    LEGEND_BOTTOM
-};
 
 namespace CGraph {
 class CairoGraph : public Gtk::DrawingArea {
@@ -103,7 +72,7 @@ class CairoGraph : public Gtk::DrawingArea {
         void add_point(size_t seriesnum, const double x, const double y, bool update_minmax = true);
 
         void add_multi_legends(const std::vector<Glib::ustring>& legends, const double offsetx = 0.0, const double offsety = 0.0);
-        void add_single_legend(const Glib::ustring& legend, CairoGraphPos pos, const bool showlinecolour);
+        void add_single_legend(const Glib::ustring& legend, CairoGraphLegendPosition pos, const bool showlinecolour);
         void show_legend(const bool show);
         void set_legend_scale(const double scale);
         const Glib::ustring& get_theme_name() const;
@@ -166,7 +135,7 @@ class CairoGraph : public Gtk::DrawingArea {
         std::vector<Gdk::RGBA> seriescolour;
         std::vector<CairoGraphLineStyle> serieslinestyle;
         CairoGraphBoxStyle graphboxstyle;
-        CairoGraphPos legend_pos;
+        CairoGraphLegendPosition legend_pos;
         Glib::ustring current_theme;
         Glib::ustring text_object_font_family;
         Gtk::Grid* grid;
@@ -175,6 +144,8 @@ class CairoGraph : public Gtk::DrawingArea {
         Gtk::Entry* yvalue;
         Gtk::Label* xvaluelabel;
         Gtk::Label* yvaluelabel;
+
+        CairoGraphTheme theme;
         Gdk::RGBA bg_colour1;
         Gdk::RGBA bg_colour2;
         Gdk::RGBA axes_colour;
